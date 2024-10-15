@@ -2,9 +2,9 @@ def read_input_from_file(filename: str) -> list:
     cases = [] 
 
     with open(filename, 'r') as file:
-        N = int(file.readline().strip()) # N - number of cases
+        Number_cases = int(file.readline().strip())
 
-        for _ in range(N):
+        for _ in range(Number_cases):
 
             line = file.readline().strip().split()
             M, C = [int(x) for x in line] # M - budget, C - number of garments
@@ -36,17 +36,17 @@ def voraz(case: list) -> list:
 
     candidates.sort(reverse=True, key=lambda x: x[0])
 
-    while len(candidates) > 0 and not solucion(solution, case['C']):
-        x = seleccionar(candidates)
+    while len(candidates) > 0 and not solution(solution, case['C']):
+        x = select(candidates)
         candidates.remove(x)
         if factible(solution, x, budget):
-            insertar(solution, x)
+            insert(solution, x)
 
-    if not solucion(solution, case['C']):
+    if not solution(solution, case['C']):
         return "No se puede encontrar solución"
     return solution, sum(p[0] for p in solution) #Solucion y 
 
-def seleccionar(candidates:list) -> int:
+def select(candidates:list) -> int:
     return candidates[0]
 
 def factible(solution, x, budget: int) -> bool:
@@ -54,16 +54,21 @@ def factible(solution, x, budget: int) -> bool:
     price, garment_type = x
     return (garment_type not in used_types) and (sum(p[0] for p in solution) + price <= budget)
 
-def solucion(solution: list, C: int) -> bool:
+def solution(solution: list, C: int) -> bool:
     return len(solution) == C
 
-def insertar(solution: list, x: tuple):
+def insert(solution: list, x: tuple):
     solution.append(x)
 
 
 
-#LEctura de fichero
+#Read file
+#Rute Iván
 filename = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/ADA_boletin_P1/enunciados/04 - boda/tests/T1/901a.in'
+
+#Rute Katerine (no se si se escribe asi (*^_^*)
+#filename = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/ADA_boletin_P1/enunciados/04 - boda/tests/T1/901a.in'
+
 cases = read_input_from_file(filename) # dictionarys list [{M:Budget, C:number garments, garments: models lists}]
 
 
