@@ -26,6 +26,7 @@ def voraz(case: dict) -> tuple:
     number_garments = case['number_garments'] 
     garments = case['garments']
     candidates = []
+    money = budget
 
    # for garment, models in enumerate(garments):
     #    for price in models:
@@ -33,23 +34,24 @@ def voraz(case: dict) -> tuple:
     for garment, models in enumerate(garments):
         candidates.append((models, garment + 1))  # (price, garment_type)
 
-    cont = 0
+
     type_garment_added = []
     while len(candidates) > 0 and not solution(sol, number_garments):
         candidate = candidates.pop(0) # Delete the first candidate
-        if candidate[1] not in type_garment_added:
-            if cont % 2 == 0:
-                insert(sol, candidate, budget)
-            else:
-                prueba(sol,candidate, budget)
-            type_garment_added.append(candidate[1])
-        cont = cont + 1
+        #if candidate[1] not in type_garment_added:
+            #if cont % 2 == 0 and budget != 62:
+            #insert(sol, candidate, budget)
+
+        money, sol = prueba(sol,candidate, money, budget)
+        
+        type_garment_added.append(candidate[1])
+
 
     
 #    if not solution(sol, number_garments):
  #       print("No se puede encontrar solución")
     
-
+    print(sol)
     return sol, budget #sol:  
 
 
@@ -59,9 +61,23 @@ def solution(sol: list, number_garments: int) -> bool:
     return len(sol) == number_garments
 
 
-def prueba(sol,candidate, budget:int):
-    price_min = min(candidate[0])
-    sol.append((price_min, candidate[1]))
+def prueba(sol,candidate, money, budget):
+    candidate[0].sort(reverse=True, key= lambda x: x)
+    type_garment = candidate[1]
+    prices = candidate[0]
+
+    for price in prices:
+        if money < budget:
+            sol.append((price, type_garment))
+            money = money - price
+    
+        low_price = min(prices)
+        sol.append((low_price, type_garment))
+
+    return money, sol
+
+            
+
 
 #center value
 def insert(sol: list, candidate: tuple, budget:int):
@@ -81,7 +97,7 @@ def insert(sol: list, candidate: tuple, budget:int):
 #Read file
 #Rute Iván
 filename = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/PRACTICAS/Algoritmo Voraz/tests/T1/901a.in'
-filename_out = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/PRACTICAS/Algoritmo Voraz/tests/T1/901a (Copiar).out'
+filename_out = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/PRACTICAS/Algoritmo Voraz/tests/T1/901a (Copiar2).out'
 
 #Rute Katerine (no se si se escribe asi (*^_^*)
 #filename = '/home/ivan/Universidad/2º Curso/Analisis y diseños de algoritmos/ADA_boletin_P1/enunciados/04 - boda/tests/T1/901a.in'

@@ -1,3 +1,7 @@
+import time
+
+
+
 def read_input_from_file(filename):
     cases = []
 
@@ -23,7 +27,7 @@ def read_input_from_file(filename):
     return cases # list of dictionaries
 
 
-filename = '901a.in'
+filename = 'tests/T1/901a.in'
 cases = read_input_from_file(filename)
 
 #for case in cases:
@@ -38,13 +42,15 @@ def voraz(budget, garments, gar_number):
     #sorted_garments = sorted(garments, key=lambda x: max(x), reverse=True)
     #sorted_garments = sorted(garments, key=lambda x: len(x), reverse=True)
 
-
+    print(garments)
+    print(max(garments))
     # Sort garments by combined criteria
     sorted_garments = sorted(garments, key=lambda x:
-    (1 / 8 * (max(x) - min(x)) +  # prioritize small range
+    (1 / 8 * -(max(x) - min(x)) +  # prioritize small range
      1 / 8 * max(x) +  # prioritize biggest maximum
-     3 / 4 * -len(x)),  # prioritize shortest list
+     3 / 4 * len(x)),  # prioritize shortest list
                              reverse=True)
+    print(sorted_garments)
 
     for garment in sorted_garments:
         garment.sort(reverse=True) # Sort prices in descending order
@@ -73,10 +79,28 @@ def feasible(model_price, budget, gar_number, garment, selected_count, current_s
 
     return model_price <= (budget - current_sum) / (gar_number - selected_count)
 
+
 def solution(s, gar_number):
     return len(s) == gar_number
 
-for case in cases:
-    result = voraz(case['M'], case['garments'], case['C'])
-    print(result, case['M'])
+
+
+
+def execution_time(budget: int, garments: list[list], gar_number: int) -> tuple[int, int]:
+    start_time = time.time()
+    result = voraz(budget, garments, gar_number)
+    end_time = time.time()
+    exec_time = end_time - start_time
+    return result, exec_time
+
+
+
+if __name__ == '__main__':
+
+    filename = 'tests/T1/901a.in'
+    cases = read_input_from_file(filename)
+
+    for case in cases:
+        result, exec_time = execution_time(case['M'], case['garments'], case['C'])
+        print(result, case['M'])
 
