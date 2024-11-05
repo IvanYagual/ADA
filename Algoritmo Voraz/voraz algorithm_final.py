@@ -1,3 +1,5 @@
+import time
+
 def read_cases_from_file(filename):
     cases = []
 
@@ -30,18 +32,9 @@ def greedy_selection(budget, garments, num_garments):
         weighted_garments.remove(garment_with_best_weight)
         garment_prices = garment_with_best_weight[0]
 
-        max_feasible_price = None
         max_price_per_garment = (budget - current_total) / (num_garments - len(selected_prices))
 
-        for price in garment_prices:
-            if is_feasible(price, max_price_per_garment):
-                if max_feasible_price is None or max_feasible_price < price:
-                    max_feasible_price = price
-
-        if max_feasible_price is None:
-            min_price = min(garment_prices)
-            if current_total + min_price <= budget:
-                max_feasible_price = min_price
+        max_feasible_price = selection(garment_prices, max_price_per_garment, current_total, budget)
 
         if max_feasible_price is not None:
             current_total += max_feasible_price
@@ -49,19 +42,24 @@ def greedy_selection(budget, garments, num_garments):
         else:
             break
 
-    if not is_solution_complete(selected_prices, num_garments):
-        return None, None
+    if not len(selected_prices) == num_garments: # solution function
+        return None
 
-    return selected_prices, sum(selected_prices)
+    return sum(selected_prices)
 
+def selection(garment_prices, max_price_per_garment, current_total, budget):
+    max_feasible_price = None
+    for price in garment_prices:
+        if price <= max_price_per_garment:
+            if max_feasible_price is None or max_feasible_price < price:
+                max_feasible_price = price
 
-def is_feasible(price, max_price):
-    return price <= max_price
+    if max_feasible_price is None:
+        min_price = min(garment_prices)
+        if current_total + min_price <= budget:
+            max_feasible_price = min_price
 
-
-def is_solution_complete(selected_prices, num_garments):
-    return len(selected_prices) == num_garments
-
+    return max_feasible_price
 
 def calculate_weights(garment_list):
     weighted_list = []
@@ -85,15 +83,9 @@ def select_best_weighted_garment(weighted_garments):
 
 
 
-def validation(in_file, out_file, function):
+def validation(out_file, greedy_solution):
 
-    # Read and process cases
-    cases = read_cases_from_file(in_file)
-    greedy_solution = [
-        0 if (total_price := function(case['budget'], case['garments'], case['num_garments'])[
-            1]) is None else total_price
-        for case in cases
-    ]
+    greedy_solution = [greed_sol or 0 for greed_sol in greedy_solution]
 
     # Read expected solutions from file
     with open(out_file, 'r') as out_file:
@@ -111,11 +103,12 @@ def validation(in_file, out_file, function):
             else:
                 percentages.append(0.0)  # Expected is zero, but actual is not
         else:
-            percentage = (greedy_solution[i] * 100) / actual_solutions[i]# Calculate percentage normally
+            percentage = (greedy_solution[i] * 100) / actual_solutions[i]# Calculate percentage
             percentages.append(round(percentage, 2))
 
+
     accuracy = round(sum(percentages) / len(percentages), 2)
-    return percentages, accuracy
+    return accuracy, percentages
 
 # List of test cases
 test_cases = [
@@ -124,7 +117,20 @@ test_cases = [
     ('901c.in', '901c.out'),
 ]
 
-# Execute validation for each test case and print the accuracy
 for f_in, f_out in test_cases:
-    accuracy = validation(f_in, f_out, greedy_selection)[1]
-    print(f'Accuracy for {f_in}: {accuracy:.2f}')
+
+    cases = read_cases_from_file(f_in)
+
+    solutions = []
+    times = []
+
+    for case in cases:
+        time_start = time.time()
+        solution = greedy_selection(case['budget'], case['garments'], case['num_garments'])
+        time_end = time.time()
+        times.append(time_end - time_start)
+        solutions.append(solution)
+        print(f'Number of garments: {case['num_garments']}, time of execution: {time_end - time_start:.7f} s')
+    accuracy, pr = validation(f_out, solutions)
+    print(f'Accuracy for {f_in}: {accuracy}, Times: {(sum(times) / len(times)):.7f} s')
+    #print(accuracy)
