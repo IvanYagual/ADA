@@ -34,6 +34,7 @@ def voraz(budget, garments, gar_number):
 
     for _ in range(len(weight_garments)):
         garment = better_weight(weight_garments)
+        weight_garments.remove(garment)
         max_feasible_value = None
 
         actual_maximum_prize = (budget - current_sum) / (gar_number - len(s))
@@ -66,11 +67,12 @@ def add_weights(var_list):
     
 def better_weight(weight_garments):
     max_weight = 0
+    garment = None
     for value, weight in weight_garments:
         if max_weight < weight:
             max_weight = weight
             garment = value
-    return garment 
+    return garment
 
 
 def feasible(model_price, garment, actual_maximum_prize, current_sum, budget, max_feasible_value):
