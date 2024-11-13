@@ -128,12 +128,12 @@ def read_cases_from_file(filename):
     return cases
 
 def prubea_mas_hermanos(nivel, hermnanos_recorridos, garments):
-    return hermnanos_recorridos < len(garments[nivel])
+    return hermnanos_recorridos < len(garments[nivel]) #Comprueba si existen modelos(hermanos) en un nivel por recorrer
 
 def prube_generar(nivel, s, hermanos_recorridos, garments, total_gastado, budget):
-    total_gastado += garments[nivel][hermanos_recorridos]
-    if total_gastado <= budget:
-        s[nivel] = garments[nivel][hermanos_recorridos]
+    total_gastado += garments[nivel][hermanos_recorridos] #Añade el nuevo precio al gasto total
+    if total_gastado <= budget: #Si no se supera el presupuesto
+        s[nivel] = garments[nivel][hermanos_recorridos] #Añade a la solución el modelo
     return s, total_gastado
 
 
@@ -141,7 +141,7 @@ def prueba1_backtracking(budget, garments, num_garments):
     nivel = 0 #Inicializa en la raiz
     s = [0] * num_garments #Inicialización
     all_combinations = [] #Guarda todas las posibles combinaciones
-    hermanos_recorridos = [0] * num_garments #Lista cada posición representa el nivel y cada valor el indice del hermano
+    hermanos_recorridos = [0] * num_garments #Lista: cada posición representa el nivel(prenda) y cada valor de esa posicion es el indice del modelo, este indice permite saber en que modelo se encuentra
     total_gastado = 0
     #soa = None
     #total_actual = 0#Dinero acumulado
@@ -151,26 +151,26 @@ def prueba1_backtracking(budget, garments, num_garments):
         #garment_with_best_weight = select_best_weighted_garment(weighted_garments)
         #garment in weighted_garments: # Recorre las prendas
         #s, total_actual = prube_generar (total_actual, nivel, s, garment_with_best_weight[nivel])# se añade el modelo más caro de la prenda
-        print(s)
-        if nivel == num_garments or total_gastado > budget: # Significa que ya ha obtenido un modelo de cada prenda
-            if total_gastado <= budget:
+
+        if nivel == num_garments or total_gastado > budget: # Significa que ya ha obtenido un modelo de cada prenda o se supero el presupuesto
+            if total_gastado <= budget: # TRUE Si entro al if porque se encuentra en el último nivel pero no se supero el budget
                 all_combinations.append(s[:]) #Añade esa combinacion de modelos
-            nivel -= 1 #Sube de nivel 
-            total_gastado -= garments[nivel][hermanos_recorridos[nivel]]
-            if nivel >= 0: # Si no se encuentra en la raiz
+            if nivel >= 0: #Si el nivel no es la raiz
+                nivel -= 1 #Sube de nivel 
+                total_gastado -= garments[nivel][hermanos_recorridos[nivel]] #Le resta la última prenda para pasar al hermano
+             # Si no se encuentra en la raiz
                 hermanos_recorridos[nivel] += 1 #Indica que pasará al siguiente hermano
 
         elif prubea_mas_hermanos(nivel, hermanos_recorridos[nivel], garments): # faltan hermanos por recorrer
-            s, total_gastado = prube_generar(nivel, s, hermanos_recorridos[nivel], garments, total_gastado, budget) # Añade el siguiente hermano
-            nivel += 1 #Sube de nivel
-            if nivel < num_garments:
-                hermanos_recorridos[nivel] = 0
+            s, total_gastado = prube_generar(nivel, s, hermanos_recorridos[nivel], garments, total_gastado, budget) # Añade el siguiente modelo
+            nivel += 1 #baja de nivel
+            if nivel < num_garments: #If todavía no ha llegado al ultimo nivel (prenda)
+                hermanos_recorridos[nivel] = 0 #Asigna 0, porque indica que reinicia la prenda de ese nivel
         else:
-            nivel -= 1
-            if nivel != -1:
-                total_gastado -= garments[nivel][hermanos_recorridos[nivel]]
-            if nivel >= 0:
-                hermanos_recorridos[nivel] += 1
+            nivel -= 1 #Si se llego a la ultima prenda sube de nivel (permite cambiar de hermano)
+            if nivel >= 0: #Si nivel es mayor a cero
+                total_gastado -= garments[nivel][hermanos_recorridos[nivel]] #Resta el ultimo modelo, para continuar con otro nivel(prenda)
+                hermanos_recorridos[nivel] += 1 #Indica que probará con el hermano
     return all_combinations
 
 
@@ -212,6 +212,9 @@ def select_best_weighted_garment(weighted_garments):
 
 
 
+
+
+#¡¡¡¡¡ SON PRUEBAS, CON EL PRIMER CASO DE LOS DATOS ORIGINALES TARDA 8 HORAS EN RECORRERLO !!!!!!!!! PODA URGENTE
 def main():
     test_cases = [
     ('901a (Copy).in', '901a.out')
@@ -219,7 +222,7 @@ def main():
     #('901c.in', '901c.out'),
     ]
     garments = [
-    [2, 5, 8],  # Precios para la prenda 1
+    [9, 5, 8],  # Precios para la prenda 1
     [7, 4, 6, 3, 5],  # Precios para la prenda 2
     [1, 8, 3, 6, 8, 10]  # Precios para la prenda 3
 ]
