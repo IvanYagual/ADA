@@ -183,15 +183,21 @@ def divide_and_conquer_method_1(letters_str, whole_num):
 if __name__ == '__main__':
     letters1 = 'cddabcdacc'
     m1 = 5
-    test_cases = generate_strings(500, 10, 20)
+    test_cases = generate_strings(50, 10, 20)
     for random_string, m in test_cases.items():
         try:
             print(f"Random String {random_string}, m={m}")
+            start_time = time.time()
             max_total1, position1 = divide_and_conquer_method_1(random_string, m)
+            end_time = time.time()
+            print("D y V method time:", end_time - start_time)
             print(f"Divide and Conquer method 1: divide into 2")
             print(f"Maximum Total Difference: {max_total1}")
             print(f"Starting Position (1-based): {position1}")
+            start_time = time.time()
             max_total2, position2 = direct_method(random_string, m)
+            end_time = time.time()
+            print("Direct method time:", end_time - start_time)
             print(f"Direct method")
             print(f"Maximum Total Difference: {max_total2}")
             print(f"Starting Position (1-based): {position2}")
