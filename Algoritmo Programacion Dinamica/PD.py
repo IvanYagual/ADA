@@ -76,15 +76,24 @@ def main():
     """
         Función principal para probar el problema de Ikrea.
     """
+
+    #Validación - 1
     shelves_1 = [(2, 3), (4, 1), (3, 2), (1, 5)]  # [(ancho, alto)]
     wall_length_1 = 5  # Longitud de la pared
     placement1, max_shelves1 = max_shelves_pd(wall_length_1, shelves_1)
     show_results(placement1, max_shelves1, shelves_1, wall_length_1)
 
+    # Validación - 2
     shelves_2 = [(4,5), (3,7), (8,2), (7,1), (2,2)]
     wall_length_2 = 8
     placement2, max_shelves2= max_shelves_pd(wall_length_2, shelves_2)
     show_results(placement2, max_shelves2, shelves_2, wall_length_2)
+
+    # Validación - 1
+    shelves_3 = [(5, 5), (7, 7)]
+    wall_length_3 = 3
+    placement3, max_shelves3 = max_shelves_pd(wall_length_3, shelves_3)
+    show_results(placement3, max_shelves3, shelves_3, wall_length_3)
 
 if __name__ == "__main__":
     main()
