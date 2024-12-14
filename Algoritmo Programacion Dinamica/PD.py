@@ -1,5 +1,5 @@
 import numpy as np
-from typing import Tuple, List, Any
+from typing import Tuple, List
 
 
 def max_shelves_pd(wall_length: int, shelves: List[Tuple[int, int]]) -> tuple[list[int], int]:
@@ -7,12 +7,12 @@ def max_shelves_pd(wall_length: int, shelves: List[Tuple[int, int]]) -> tuple[li
     """
     Resuelve el problema de llenar la pared con estanterías utilizando programación dinámica.
 
-    Args:
-        wall_length: la longitud de la pared en metros
-        shelves: una lista de tuplas, donde cada tupla contiene el ancho y el alto de una estantería
+    Parámetros:
+    wall_length: la longitud de la pared en metros
+    shelves: una lista de tuplas, donde cada tupla contiene el ancho y el alto de una estantería
 
     Devuelve:
-        Una tupla que contiene:
+    Una tupla que contiene:
         - una lista indicando la orientación de cada estantería (0 = no usada, 1 = horizontal, 2 = vertical)
         - el número máximo de estanterías que caben en la pared
     """
@@ -59,9 +59,15 @@ def max_shelves_pd(wall_length: int, shelves: List[Tuple[int, int]]) -> tuple[li
     return placement, dp[n_shelves][wall_length]
 
 
-def show_results(placement, max_shelves, shelves, wall_length):
+def show_results(placement: List[int], max_shelves: int, shelves: List[Tuple[int, int]], wall_length: int) -> None:
     """
-            Función para mostrar los resultados del problema.
+    Función para mostrar los resultados del problema.
+
+    Muestra los resultados en consola de manera detallada, la longitud de la pared, el número de estanterías
+    disponibles, las estánterías usadas, su horientación y la medida en lo ancho o en lo alto, según la horientación, 
+    que ocupa en la pared.
+
+    Parámetros
     """
 
     print(f"\n\tLongitud de la pared: {wall_length}")
@@ -72,9 +78,9 @@ def show_results(placement, max_shelves, shelves, wall_length):
             if p == 1 else f"Vertical - {shelves[i - 1][1]}"
         print(f"Estantería {i}: {orientation}")
 
-def main():
+def main() -> None:
     """
-        Función principal para probar el problema de Ikrea.
+    Función principal.
     """
     shelves_1 = [(2, 3), (4, 1), (3, 2), (1, 5)]  # [(ancho, alto)]
     wall_length_1 = 5  # Longitud de la pared
