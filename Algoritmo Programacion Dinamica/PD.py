@@ -67,7 +67,18 @@ def show_results(placement: List[int], max_shelves: int, shelves: List[Tuple[int
     disponibles, las estánterías usadas, su horientación y la medida en lo ancho o en lo alto, según la horientación, 
     que ocupa en la pared.
 
-    Parámetros
+    Parámetros:
+        placement (List[int]): Lista con la orientación de cada estantería:
+            - 0: No usada.
+            - 1: Orientación horizontal.
+            - 2: Orientación vertical.
+        max_shelves (int): Número máximo de estanterías que se pueden usar en la pared.
+        wall_length: la longitud de la pared en metros
+        shelves: una lista de tuplas, donde cada tupla contiene el ancho y el alto de una estantería
+
+    Devuelve:
+        None: Imprime los resultados directamente en consola.
+
     """
 
     print(f"\n\tLongitud de la pared: {wall_length}")
@@ -95,7 +106,7 @@ def main() -> None:
     placement2, max_shelves2= max_shelves_pd(wall_length_2, shelves_2)
     show_results(placement2, max_shelves2, shelves_2, wall_length_2)
 
-    # Validación - 1
+    # Validación - 3
     shelves_3 = [(5, 5), (7, 7)]
     wall_length_3 = 3
     placement3, max_shelves3 = max_shelves_pd(wall_length_3, shelves_3)

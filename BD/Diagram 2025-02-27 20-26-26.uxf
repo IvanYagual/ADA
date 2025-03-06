@@ -1,0 +1,96 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><help_text>Space for diagram notes
+&lt;&lt;incluye&gt;&gt;</help_text><element><id>UMLActor</id><coordinates><x>0</x><y>232</y><w>64</w><h>88</h></coordinates><panel_attributes>Trabajador</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>112</y><w>376</w><h>256</h></coordinates><panel_attributes>Empresa de transporte</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>304</x><y>168</y><w>64</w><h>40</h></coordinates><panel_attributes>Elegir envio
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>256</x><y>152</y><w>104</w><h>32</h></coordinates><panel_attributes>lt=.
+&lt;&lt;incluye&gt;&gt;</panel_attributes><additional_attributes>105;20;10;20</additional_attributes></element><element><id>UMLActor</id><coordinates><x>512</x><y>280</y><w>56</w><h>88</h></coordinates><panel_attributes>Ayudante</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>176</x><y>160</y><w>96</w><h>32</h></coordinates><panel_attributes>Crear pedido
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>192</x><y>232</y><w>104</w><h>40</h></coordinates><panel_attributes>Controlar proces.
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>56</x><y>240</y><w>152</w><h>48</h></coordinates><panel_attributes>lt=-
+&lt;&lt;revisar&gt;&gt;</panel_attributes><additional_attributes>170;10;10;40</additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>192</x><y>288</y><w>104</w><h>40</h></coordinates><panel_attributes>Actual. modific.
+bg=orange</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>56</x><y>168</y><w>136</w><h>40</h></coordinates><panel_attributes>&lt;&lt;registra&gt;&gt;</panel_attributes><additional_attributes>150;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>304</y><w>240</w><h>40</h></coordinates><panel_attributes>lt=-
+&lt;&lt;actualiza&gt;&gt;</panel_attributes><additional_attributes>10;10;280;30</additional_attributes></element><element><id>UMLActor</id><coordinates><x>8</x><y>144</y><w>56</w><h>88</h></coordinates><panel_attributes>Cliente</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>824</x><y>280</y><w>224</w><h>120</h></coordinates><panel_attributes>Vehiculo
+--
+- id_vehiculo: int
+- capacidad: float 
+- list_pedido: list[Pedido]
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>672</x><y>424</y><w>224</w><h>120</h></coordinates><panel_attributes>Motorizado
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>984</x><y>424</y><w>224</w><h>120</h></coordinates><panel_attributes>Ecologico
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>680</x><y>616</y><w>144</w><h>136</h></coordinates><panel_attributes>Furgoneta
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>856</x><y>616</y><w>144</w><h>136</h></coordinates><panel_attributes>Camion
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1032</x><y>616</y><w>144</w><h>136</h></coordinates><panel_attributes>Bicicleta
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>736</x><y>536</y><w>48</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>40;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>776</x><y>536</y><w>136</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;150;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1088</x><y>536</y><w>32</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;20;100</additional_attributes></element><element><id>Relation</id><coordinates><x>864</x><y>536</y><w>240</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;280;100</additional_attributes></element><element><id>Relation</id><coordinates><x>768</x><y>344</y><w>72</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>70;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1040</x><y>328</y><w>96</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;100;120</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1432</x><y>280</y><w>224</w><h>120</h></coordinates><panel_attributes>Persona
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1264</x><y>480</y><w>128</w><h>120</h></coordinates><panel_attributes>Cliente
+--
+- nombre: string
+- dni: string
+- numero_telefono: string
+- domicilio: string
+- pedidos: list[Pedido]
+--
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1384</x><y>840</y><w>136</w><h>120</h></coordinates><panel_attributes>Trabajador
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1312</x><y>656</y><w>136</w><h>120</h></coordinates><panel_attributes>Ayudante
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1480</x><y>656</y><w>136</w><h>120</h></coordinates><panel_attributes>Conductor
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1336</x><y>392</y><w>200</w><h>104</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>230;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1368</x><y>392</y><w>176</w><h>272</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>200;10;10;320</additional_attributes></element><element><id>Relation</id><coordinates><x>1384</x><y>768</y><w>80</w><h>88</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;80;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1448</x><y>768</y><w>120</w><h>96</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>130;10;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1056</x><y>816</y><w>128</w><h>120</h></coordinates><panel_attributes>Parte
+--
+
+--
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1528</x><y>392</y><w>40</w><h>272</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>10;10;30;320</additional_attributes></element><element><id>Relation</id><coordinates><x>1120</x><y>720</y><w>208</w><h>112</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;120;240;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1176</x><y>168</y><w>128</w><h>120</h></coordinates><panel_attributes>Pedido
+--
+- id_pedido: string
+- carga: float
+- destino: string
+- distancia: float
+--
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>
